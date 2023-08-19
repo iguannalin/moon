@@ -37,10 +37,15 @@ body {
   top: 49%;
   left: 66%;
   font-size: 36px;
-  line-height: 28px;
+  line-height: 26px;
   width: 100px;
   text-transform: lowercase;
   text-align: center;
+}
+
+#label:before {
+  content: "––––––";
+  padding-right: 5px;
 }
 
 #label:hover {
