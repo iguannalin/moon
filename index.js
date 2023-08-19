@@ -22,8 +22,9 @@ window.addEventListener("load", () => {
       "Full Cold Moon": "December 26, 2023"
   };
 
-  function displayMoons() {
-    const now = new Date();
+  function displayMoons(now) {
+    const container = document.getElementById("container");
+    container.innerHTML = "";
     let closest = Infinity;
     let closestIndex;
     let closestMoon;
@@ -38,20 +39,30 @@ window.addEventListener("load", () => {
         lastMoon = d;
       }
     });
-    let moonEmojiIndex = scale(Date.now(), Date.parse(moons[lastMoon]), Date.parse(moons[closestMoon]), 0, 8);
+    let moonEmojiIndex = scale(now, Date.parse(moons[lastMoon]), Date.parse(moons[closestMoon]), 0, 8);
     let top = moonEmojiIndex % 1;
     moonEmojiIndex = Math.floor(moonEmojiIndex);
-    const container = document.getElementById("container");
     container.style.marginTop =  `${top*10}px`;
     for (let i = 0; i < 8; i++) {
       const div = document.createElement("div");
-      let count = (moonEmojiIndex<(4-i) ? 8-((moonEmojiIndex-(4-i))*(-1)) : (i<5) ? moonEmojiIndex-(4-i) : moonEmojiIndex+(i-4));
+      let count = (moonEmojiIndex<(4-i) ? 8-((moonEmojiIndex-(4-i))*(-1)) : (i<5) ? moonEmojiIndex-(4-i) : (i>7) ? moonEmojiIndex+(i-4) : 7-i);
       div.innerHTML = moonEmojis[count];
       container.appendChild(div);
     }
     const label = document.getElementById("label");
-    label.innerText = Object.keys(moons)[0];
+    label.innerText = closestMoon;
   }
 
-  displayMoons();
+  displayMoons(Date.now());
+  // let days = 0;
+  // addDays code from -- https://stackoverflow.com/questions/563406/how-to-add-days-to-date
+  // Date.prototype.addDays = function(days) {
+  //     var date = new Date(this.valueOf());
+  //     date.setDate(date.getDate() + days);
+  //     return date;
+  // }
+  // let int = setInterval(() => {
+  //   displayMoons(new Date().addDays(days+=5));
+  //   if (days > 50) clearInterval(int);
+  // }, 500);
 });
