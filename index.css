@@ -21,3 +21,28 @@ body {
   display: flex;
   text-shadow: #858ebc -2px 2px 8px;
 }
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  font-size: 72px;
+  line-height: 105px;
+}
+
+#label {
+  position: absolute;
+  opacity: 0.5;
+  top: 49%;
+  left: 66%;
+  font-size: 36px;
+  line-height: 28px;
+  width: 100px;
+  text-transform: lowercase;
+  text-align: center;
+}
+
+#label:hover {
+  opacity: 1;
+}
